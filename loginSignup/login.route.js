@@ -12,7 +12,7 @@ authRouter.post("/signup", async(req, res) => {
     console.log(req.body)
     UserModel.findOne({"email":req.body.email},function(err,result){
         if(result){
-            res.send("you are registered with this email")
+            res.send({message:"you are registered with this email"})
         }
         else{
             const user = new UserModel(req.body)
