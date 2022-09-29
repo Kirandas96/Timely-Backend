@@ -32,14 +32,14 @@ authRouter.post("/login", async (req, res) => {
         
         UserModel.findOne({"email":req.body.email},function(err,result){
             if(!result){
-                res.send("wrong email")
+                res.send({message:"wrong email"})
             }
             else{                    
                 if(result.password!==req.body.password){
-                    res.send("wrong password")
+                    res.send({message:"wrong password"})
                 }
                 else{
-                    res.send(result)
+                    res.send({message:"login successfull",data:result})
                 } 
             }
         })
