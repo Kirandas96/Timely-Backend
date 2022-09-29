@@ -10,7 +10,7 @@ const connection = require("./db");
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({origin:["http://localhost:3000/","https://timelyclone.netlify.app/"]}));
+app.use(cors({origin:["http://localhost:3000","https://timelyclone.netlify.app/"]}));
 // route import
 const authRouter = require("./loginSignup/login.route");
 const taskRouter = require("./tasks/task.route");
