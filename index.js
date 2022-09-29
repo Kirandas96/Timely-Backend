@@ -10,7 +10,7 @@ const connection = require("./db");
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({origin:'*'}));
 // route import
 const authRouter = require("./loginSignup/login.route");
 const taskRouter = require("./tasks/task.route");
