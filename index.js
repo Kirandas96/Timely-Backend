@@ -4,7 +4,7 @@ require("dotenv").config();
 const port = process.env.PORT || 8080;
 const cors = require("cors");
 const UserModel = require("./loginSignup/Login.model");
-
+const tokenValidator=require('./utils/tokenValidator')
 // connection
 const connection = require("./db");
 // middlewares
@@ -34,7 +34,7 @@ const projectRouter = require("./Project/Project.route");
 
 // routes
 app.use("/auth", authRouter);
-app.use("/user", projectRouter);
+app.use("/user",tokenValidator,projectRouter);
 app.use("/project", taskRouter);
 
 app.get("/", (req, res) => {
