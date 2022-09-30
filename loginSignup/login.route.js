@@ -1,4 +1,5 @@
-const {Router} = require("express")
+const {Router} = require("express");
+const createToken = require("../utils/createToken");
 const UserModel = require("./Login.model");
 
 
@@ -20,7 +21,7 @@ authRouter.post("/signup", async(req, res) => {
             if(err){
                 res.status(500).send({message : "Error occurred"})
             }
-        return res.status(201).send({message : "Sign up success",data:user})
+        return res.status(201).send({message : "Sign up success",data:user.name})
     }); 
         }
 })
@@ -34,12 +35,14 @@ authRouter.post("/login", async (req, res) => {
             if(!result){
                 res.send({message:"wrong email"})
             }
-            else{                    
-                if(result.password!==req.body.password){
+            else{        
+                const match=result.checkPassword(req.body.password)            
+                if(!match){
                     res.send({message:"wrong password"})
                 }
                 else{
-                    res.send({message:"login successfull",data:result})
+                    const token=createToken(result)
+                    res.send({message:"login successfull",data:result.name,token})
                 } 
             }
         })
