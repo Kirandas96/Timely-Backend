@@ -34,7 +34,7 @@ const projectRouter = require("./Project/Project.route");
 
 // routes
 app.use("/auth", authRouter);
-app.use("/user",tokenValidator,projectRouter);
+app.use("/user",projectRouter);
 app.use("/project", taskRouter);
 
 app.get("/", (req, res) => {

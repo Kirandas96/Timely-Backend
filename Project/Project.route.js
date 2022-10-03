@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const tokenValidator = require("../utils/tokenValidator");
 const projectRouter = Router();
 const ProjectModel = require("./Project.model");
 
@@ -10,12 +11,15 @@ projectRouter.get("/:userId/projects", async (req, res) => {
 
 projectRouter.get("/projects", async (req, res) => {
   const projects = await ProjectModel.find();
+  // console.log(projects);
   res.send(projects);
 });
 
-projectRouter.post("/:userId/projects", async (req, res) => {
-  const userId = req.params.userId;
-  console.log(userId);
+
+projectRouter.post("/projects",tokenValidator, async (req, res) => {
+  const userId = req.body.user_id;
+  // console.log(req);
+  // console.log(userId);
   let payload = {
     ...req.body,
     userId,
