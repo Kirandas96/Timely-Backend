@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // cors for multiple origin
 
-var allowedOrigins = ["http://localhost:3000","https://timelyclone.netlify.app/"];
+var allowedOrigins = ["http://localhost:3001","https://timelyclone.netlify.app/"];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
